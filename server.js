@@ -1,6 +1,6 @@
 "use strict";
 
-var PORT = 3000;
+var PORT = 4000;
 
 var fs = require('fs');
 var http = require('http');

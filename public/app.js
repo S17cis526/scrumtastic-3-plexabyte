@@ -1,36 +1,85 @@
-var xhr = new XMLHttpRequest();
-xhr.open('GET', '/projects/');
-xhr.send(null);
+// function loadIndex() {
+//   $.get('/projects', function(projects, status) {
+//     if(status == 200) {
+//       $('body').clear();
+//       projects.forEach(function(project)) {
+//         var link = $('a')
+//           .text(project.name)
+//           .attr('href', '/projects/'+ project.id)
+//           .on('click', function(e) {
+//             e.preventDefault();
+//             loadProject('/projects/' + project.id)
+//           });
+//         $('body').append(link);
+//       }
+//     }
+//   });
+// }
 
-xhr.onreadystatechange = function() {
-  var DONE = 4; // readyState 4 means the request is done.
-  var OK = 200; // status 200 is a successful return.
-  if (xhr.readyState === DONE) {
-    if (xhr.status === OK) {
-      console.log(xhr.responseText); // 'This is the returned text.'
-      var projects = JSON.parse(xhr.responseText);
-      projects.forEach(function(project){
-        var name = document.createElement('a');
-        name.innerHTML = project.name;
-        name.href = "/projects/" + project.id;
-        document.body.appendChild(name);
-        project.onClick = function(event) {
-          event.preventDefault();
-          // alert("Load using Ajax");
-          $('#selectedItemPanel').style.visibility='visible';
-          $('#itemTitle').innerHTML = this.name;
-          $('#itemDesc').innterHTML = this.description;
-          $('#itemID').innerHTML = this.id;
-          $('#largeImg').src = "/images/" + this.id;
-          unselectAll();
-        }
-      });
+function loadIndex() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', '/projects/');
+  xhr.send(null);
 
-    } else {
-      console.log('Error: ' + xhr.status); // An error occurred during the request.
+  xhr.onreadystatechange = function() {
+    var DONE = 4; // readyState 4 means the request is done.
+    var OK = 200; // status 200 is a successful return.
+    if (xhr.readyState === DONE) {
+      if (xhr.status === OK) {
+        console.log(xhr.responseText); // 'This is the returned text.'
+        var projects = JSON.parse(xhr.responseText);
+        projects.forEach(function(project){
+          var name = document.createElement('a');
+          name.innerHTML = project.name;
+          name.href = "/projects/" + project.id;
+          document.body.appendChild(name);
+          project.onClick = function(event) {
+            event.preventDefault();
+            alert("Load using Ajax");
+            loadProject("/projects/" + project.name);
+            $('#selectedItemPanel').style.visibility='visible';
+            $('#itemName').innerHTML = this.name;
+            $('#itemArtist').innerHTML = this.artist;
+            $('#itemGenre').innerHTML = this.genre;
+            $('#largeImg').src = "/images/" + this.id;
+            unselectAll();
+          }
+        });
+
+      } else {
+        console.log('Error: ' + xhr.status); // An error occurred during the request.
+      }
     }
   }
 }
+
+// function loadProject(url) {
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET', url);
+//   xhr.send(null);
+//
+//   xhr.onreadystatechange = function() {
+//     var DONE = 4; // readyState 4 means the request is done.
+//     var OK = 200; // status 200 is a successful return.
+//     if (xhr.readyState === DONE) {
+//       if (xhr.status === OK) {
+//         console.log(xhr.responseText); // 'This is the returned text.'
+//         var project = JSON.parse(xhr.responseText);
+//         var wrapper = document.createElement('div');
+//         var name = document.createElement('h1');
+//         var image = document.createElement('img');
+//         name.innerHTML = project.name;
+//         image.src = project.imageSrc;
+//         wrapper.body.appendChild(name);
+//         wrapper.appendChild(image);
+//         document.body.appendChild(wrapper);
+//       } else {
+//         console.log('Error: ' + xhr.status); // An error occurred during the request.
+//       }
+//     }
+//   }
+// }
+
 
 // $('#submitItem').on('click', function() {
 //   var item = $('form').serializeArray();
@@ -66,10 +115,16 @@ var displayMessage = function(message, type){
 };
 
 $('#submitItem').on('click', function() {
-  var formData = JSON.stringify( $('form').serializeArray() );
+  var formData = $('form').serialize();
   // var formData = $('form').serializeArray();
   console.log(formData);
-  projects.create(formData); //????
+  formData.append('image', $('input[type=file]')[0].files[0]);
+  // proj.create(formData);
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/projects/');
+  xhr.send(formData);
+
+
   // If projects contains the given id
   //    update that project id with new form information
   //    display item updated message.
@@ -81,7 +136,7 @@ $('#submitItem').on('click', function() {
   displayMessage("Item Uploaded.", "success");
 });
 
-
+loadIndex();
 // $( document ).ready(function(){
 //   $('#submitItem').on('click', function(){
 //     displayMessage("This is a problem!", "danger");

@@ -51,8 +51,8 @@ function create(req, res, db) {
 
   req.on("end", function() {
     var project = JSON.parse(body);
-    db.run("INSERT INTO projects (name, artist, genre) VALUES (?,?,?)",
-      [project.name, project.artists, project.genre],
+    db.run("INSERT INTO projects (name, artist, genre, filename) VALUES (?,?,?,?)",
+      [project.name, project.artists, project.genre, project.filename],
       function(err) {
         if(err) {
           console.error(err);
@@ -115,8 +115,8 @@ function update(req, res, db) {
 
   req.on("end", function() {
     var project = JSON.parse(body);
-    db.run("UPDATE projects SET name=?, artist=?, genre=? WHERE id=?",
-      [project.name, project.artist, project.genre, id],
+    db.run("UPDATE projects SET name=?, artist=?, genre=?, filename=? WHERE id=?",
+      [project.name, project.artist, project.genre, project.filename, id],
       function(err) {
         if(err) {
           console.error(err);

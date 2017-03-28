@@ -3,4 +3,5 @@ CREATE TABLE projects (
   name TEXT NOT NULL,
   artist TEXT,
   genre TEXT,
+  filename TEXT
 );

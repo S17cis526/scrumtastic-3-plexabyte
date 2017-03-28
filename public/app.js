@@ -135,14 +135,21 @@ var displayMessage = function(message, type){
 };
 
 $('#submitItem').on('click', function() {
-  var formData = $('form').serialize();
-  // var formData = $('form').serializeArray();
+
+
+  var formData = new FormData();
+  formData.append('name', $('#name').val());
+  formData.append('artist', $('#artist').val());
+  formData.append('genre', $('#genre').val());
+  formData.append('filename', $('#filename'[0].files[0]), $('#filename').val());
+  //TODO: add music
+
+
+
+  // formData.append('filename', $('input[type=file]')[0].files[0]);
+
   console.log(formData);
-  formData.append('image', $('input[type=file]')[0].files[0]);
-  // proj.create(formData);
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/projects/');
-  xhr.send(formData);
+
 
   displayMessage("Item Uploaded.", "success");
 });

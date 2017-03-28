@@ -121,7 +121,7 @@ function update(req, res, db) {
       if(err) {
         console.error(err);
         res.statusCode = 500;
-        res.end("Could not update album in database");
+        res.end("Could not update in database");
         return;
       }
       res.statusCode = 200;

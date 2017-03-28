@@ -1,9 +1,63 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Scrumtastic</title>
-  </head>
-  <body>
-    <script src="/app.js" type="text/javascript"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>Scrumtastic</title>
+</head>
+<body>
+  <div class="container-fluid">
+    <div id="message">
+    </div>
+  </div>
+  <div id="selectedItemPanel" onclick="hideMe(this)">
+    <div id="itemTitle"></div>
+    <div id="itemDesc"></div>
+    <div id="itemID"></div>
+    <img id="largeImg" style="height: 100%; margin: 0; padding: 0;">
+  </div>
+  <form>
+    <div class="form-group row">
+      <label for="text-input" class="col-2 col-form-label">Album Name</label>
+      <div class="col-10">
+        <input class="form-control" type="text" id="name" name="name">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="text-input" class="col-2 col-form-label">Artist</label>
+      <div class="col-10">
+        <input class="form-control" type="text" id="artist" name="artist">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="text-input" class="col-2 col-form-label">Genre</label>
+      <div class="col-10">
+        <input class="form-control" type="text" id="genre" name="genre">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="text-input" class="col-2 col-form-label">ID</label>
+      <div class="col-10">
+        <input class="form-control" type="text" id="id" name="id">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputFile">Album Art</label>
+      <input type="file" class="form-control-file" id="filename" aria-describedby="fileHelp">
+      <small id="fileHelp" class="form-text text-muted">Upload the catalog item image here.</small>
+    </div>
+    <button id="submitItem" type="button" class="btn btn-primary">Upload</button>
+  </div>
+</form>
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="/app.js" type="text/javascript"></script>
+</body>
 </html>

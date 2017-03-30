@@ -12,6 +12,9 @@ module.exports = {
   destroy: destroy
 }
 
+var multipart = require('../../lib/multipart');
+var fs = require('fs');
+
 /** @function list
  * Sends a list of all projects as a JSON array.
  * @param {http.incomingRequest} req - the request object
@@ -37,20 +40,20 @@ function list(req, res, db) {
  * @param {sqlite3.Database} db - the database object
  */
 function create(req, res, db) {
-  var body = "";
+  // var body = "";
+  //
+  // req.on("error", function(err){
+  //   console.error(err);
+  //   res.statusCode = 500;
+  //   res.end("Server error");
+  // });
+  //
+  // req.on("data", function(data){
+  //   body += data;
+  // });
 
-  req.on("error", function(err){
-    console.error(err);
-    res.statusCode = 500;
-    res.end("Server error");
-  });
-
-  req.on("data", function(data){
-    body += data;
-  });
-
-  req.on("end", function() {
-    var project = JSON.parse(body);
+  multipart(req, res, function(req, res) {
+    var project = req.body;
     db.run("INSERT INTO projects (name, artist, genre, filename) VALUES (?,?,?,?)",
       [project.name, project.artists, project.genre, project.filename],
       function(err) {
@@ -60,8 +63,18 @@ function create(req, res, db) {
           res.end("Could not insert album into database");
           return;
         }
-        res.statusCode = 200;
-        res.end();
+        console.log('images/' + req.body.image.filename);
+        fs.writeFile('images/' + req.body.image.filename, req.body.image.data, function(err){
+          if(err) {
+            console.error(err);
+            res.statusCode = 500;
+            res.statusMessage = "Server Error";
+            res.end("Server Error");
+            return;
+          }
+          res.statusCode = 200;
+          res.end();
+        });
       }
     );
   });

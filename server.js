@@ -25,6 +25,7 @@ router.get('/app.js', function(req, res) {
 
 
 var project = require('./src/resource/project');
+
 router.resource('/projects', project);
 
 var migrate = require('./lib/migrate');

@@ -99,6 +99,12 @@ function loadIndex() {
             $('#itemArtist').innerHTML = this.artist;
             $('#itemGenre').innerHTML = this.genre;
             $('#largeImg').src = "/images/" + this.id;
+            // router.get('/images/':filename, function() {
+            //   var filename = req.params.filename;
+            //   fs.readFile('images/' + filename, function(err, data){
+            //     res.end(data);
+            //   });
+            // });
             unselectAll();
           }
         });
@@ -137,13 +143,20 @@ var displayMessage = function(message, type){
 $('#submitItem').on('click', function() {
 
 
-  var formData = new FormData();
-  formData.append('name', $('#name').val());
-  formData.append('artist', $('#artist').val());
-  formData.append('genre', $('#genre').val());
-  formData.append('filename', $('#filename'[0].files[0]), $('#filename').val());
+  var formData = new FormData($('form')[0]);
+  // var formData = new FormData();
+  // formData.append('name', $('#name').val());
+  // formData.append('artist', $('#artist').val());
+  // formData.append('genre', $('#genre').val());
+  // formData.append('filename', $('#filename')[0].files[0], $('#filename').val());
   //TODO: add music
 
+  $.post({
+    url: '/projects',
+    data: formData,
+    contentType: 'multipart/form-data',
+    processData: false
+  });
 
 
   // formData.append('filename', $('input[type=file]')[0].files[0]);
@@ -151,7 +164,13 @@ $('#submitItem').on('click', function() {
   console.log(formData);
 
 
+
   displayMessage("Item Uploaded.", "success");
 });
+
+$('#addItem').on('click', function() {
+  //if form id is hidden, change to visible
+  //else, change to hidden.
+})
 
 loadIndex();

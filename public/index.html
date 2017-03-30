@@ -21,28 +21,31 @@
     <div id="itemID"></div>
     <img id="largeImg" style="height: 100%; margin: 0; padding: 0;">
   </div>
-  <form>
+  <div>
+    <button id="addItem" type="button" class="btn">Add Album</button>
+  </div>
+  <form display="hidden">
     <div class="form-group row">
       <label for="text-input" class="col-2 col-form-label">Album Name</label>
       <div class="col-10">
-        <input class="form-control" type="text" id="name" name="name">
+        <input name="name" class="form-control" type="text">
       </div>
     </div>
     <div class="form-group row">
       <label for="text-input" class="col-2 col-form-label">Artist</label>
       <div class="col-10">
-        <input class="form-control" type="text" id="artist" name="artist">
+        <input name="artist" class="form-control" type="text">
       </div>
     </div>
     <div class="form-group row">
       <label for="text-input" class="col-2 col-form-label">Genre</label>
       <div class="col-10">
-        <input class="form-control" type="text" id="genre" name="genre">
+        <input name="genre" class="form-control" type="text">
       </div>
     </div>
     <div class="form-group">
       <label for="inputFile">Album Art</label>
-      <input type="file" class="form-control-file" id="filename" name="filename" aria-describedby="fileHelp">
+      <input name="filename" type="file" class="form-control-file" id="filename"  aria-describedby="fileHelp">
       <small id="fileHelp" class="form-text text-muted">Upload the catalog item image here.</small>
     </div>
     <button id="submitItem" type="button" class="btn btn-primary">Upload</button>

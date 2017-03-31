@@ -142,7 +142,7 @@ var displayMessage = function(message, type){
 
 $('#submitItem').on('click', function() {
 
-
+  var xhr = new XMLHttpRequest();
   var formData = new FormData($('form')[0]);
   // var formData = new FormData();
   // formData.append('name', $('#name').val());
@@ -151,13 +151,16 @@ $('#submitItem').on('click', function() {
   // formData.append('filename', $('#filename')[0].files[0], $('#filename').val());
   //TODO: add music
 
-  $.xhr({
-    type: "POST",
-    url: '/projects',
-    data: formData,
-    contentType: 'multipart/form-data',
-    processData: false
-  });
+  xhr.open('POST', '/projects/');
+  xhr.send(formData);
+  loadIndex();
+  // $.xhr({
+  //   type: "POST",
+  //   url: '/projects',
+  //   data: formData,
+  //   contentType: 'multipart/form-data',
+  //   processData: false
+  // });
 
 
   // formData.append('filename', $('input[type=file]')[0].files[0]);

@@ -72,18 +72,26 @@ function create(req, res, db) {
           res.end("Could not insert album into database");
           return;
         }
-        console.log('images/' + req.body.image.filename);
-        fs.writeFile('images/' + req.body.image.filename, req.body.image.data, function(err){
-          if(err) {
-            console.error(err);
-            res.statusCode = 500;
-            res.statusMessage = "Server Error";
-            res.end("Server Error");
-            return;
-          }
-          res.statusCode = 200;
-          res.end();
-        });
+        //TODO: FIX THIS
+        // if(!req.body.image.filename) {
+        //   console.error("No file in upload");
+        //   res.statusCode = 400;
+        //   res.statusMessage = "No file specified"
+        //   res.end("No file specified");
+        //   return;
+        // }
+        console.log('images/' + req.body.id);
+        // fs.writeFile('images/' + req.body.id, req.body.file.data, function(err){
+        //   if(err) {
+        //     console.error(err);
+        //     res.statusCode = 500;
+        //     res.statusMessage = "Server Error";
+        //     res.end("Server Error");
+        //     return;
+        //   }
+        //   res.statusCode = 200;
+        //   res.end();
+        // });
       }
     );
   });

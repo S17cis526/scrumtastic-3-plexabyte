@@ -72,9 +72,10 @@
 //   }
 // }
 
-
+//TODO: Load the albums before the submit button.
 function loadIndex() {
   var xhr = new XMLHttpRequest();
+
   xhr.open('GET', '/projects/');
   xhr.send(null);
 
@@ -85,29 +86,32 @@ function loadIndex() {
       if (xhr.status === OK) {
         console.log(xhr.responseText); // 'This is the returned text.'
         var projects = JSON.parse(xhr.responseText);
-        projects.forEach(function(project){
-          var name = document.createElement('a');
-          name.innerHTML = project.name;
-          name.href = "/projects/" + project.id;
-          document.body.appendChild(name);
-          project.onClick = function(event) {
-            event.preventDefault();
-            alert("Load using Ajax");
-            loadProject("/projects/" + project.name);
-            $('#selectedItemPanel').style.visibility='visible';
-            $('#itemName').innerHTML = this.name;
-            $('#itemArtist').innerHTML = this.artist;
-            $('#itemGenre').innerHTML = this.genre;
-            $('#largeImg').src = "/images/" + this.id;
-            // router.get('/images/':filename, function() {
-            //   var filename = req.params.filename;
-            //   fs.readFile('images/' + filename, function(err, data){
-            //     res.end(data);
-            //   });
-            // });
-            unselectAll();
-          }
-        });
+        $('#catalogItems').empty();
+        $('#catalogItems').html(list(projects));
+
+        // projects.forEach(function(project){
+        //   var name = document.createElement('a');
+        //   name.innerHTML = project.name;
+        //   name.href = "/projects/" + project.id;
+        //   document.body.append(name);
+        //   name.onClick = function(event) {
+        //     event.preventDefault();
+        //     alert("Load using Ajax");
+        //     loadProject("/projects/" + project.name);
+        //     $('#selectedItemPanel').style.visibility='visible';
+        //     $('#itemName').innerHTML = this.name;
+        //     $('#itemArtist').innerHTML = this.artist;
+        //     $('#itemGenre').innerHTML = this.genre;
+        //     $('#largeImg').src = "/images/" + this.id;
+        //     // router.get('/images/':filename, function() {
+        //     //   var filename = req.params.filename;
+        //     //   fs.readFile('images/' + filename, function(err, data){
+        //     //     res.end(data);
+        //     //   });
+        //     // });
+        //     unselectAll();
+        //   }
+        // });
 
       } else {
         console.log('Error: ' + xhr.status); // An error occurred during the request.
@@ -116,11 +120,35 @@ function loadIndex() {
   }
 }
 
+function showLarge(project) {
+  $('#selectedItemPanel').css('visibility', 'visible');
+  $('#itemName').html(project.name);
+  $('#itemArtist').html(project.artist);
+  $('#itemGenre').html(project.genre);
+}
 
-// $('#submitItem').on('click', function() {
-//   var item = $('form').serializeArray();
-//   displayMessage("Item Submitted.", "success")
-// });
+function list(projects){
+  var table = $('<table>').addClass('table');
+  var head = $('<tr>').append('<th>Name</th>').appendTo(table);
+  projects.forEach(function(project) {
+    var row = $('<tr>')
+    .append($('<td>')
+      .text(project.name))
+    .click(function(event) {
+      event.preventDefault();
+      //alert("Load using Ajax");
+      //loadProject("/projects/" + project.name);
+      showLarge(project);
+      //$('#largeImg').src = "/images/" + this.id;
+      unselectAll();
+    }).appendTo(table);
+  });
+  return table;
+}
+
+// function loadForm() {
+//   var html =
+// }
 
 function unselectAll() {
     if(document.selection) document.selection.empty();
@@ -181,5 +209,7 @@ $('#addItem').on('click', function() {
     form.css('visibility', 'visible');
   }
 });
+
+
 
 loadIndex();

@@ -1,3 +1,12 @@
+// module.exports = {
+//     list
+// }
+// funtion list(projects) {
+//   var table = $('<table>').class('table');
+//   var head = $('<head>').class('head');
+// }
+
+
 "use strict";
 
 /** @module project

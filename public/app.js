@@ -151,7 +151,8 @@ $('#submitItem').on('click', function() {
   // formData.append('filename', $('#filename')[0].files[0], $('#filename').val());
   //TODO: add music
 
-  $.post({
+  $.xhr({
+    type: "POST",
     url: '/projects',
     data: formData,
     contentType: 'multipart/form-data',
@@ -169,8 +170,13 @@ $('#submitItem').on('click', function() {
 });
 
 $('#addItem').on('click', function() {
-  //if form id is hidden, change to visible
-  //else, change to hidden.
-})
+  var form = $('#editForm');
+  if (form.css('visibility') == 'visible') {
+    form.css('visibility', 'hidden');
+  }
+  else {
+    form.css('visibility', 'visible');
+  }
+});
 
 loadIndex();

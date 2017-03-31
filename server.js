@@ -23,6 +23,13 @@ router.get('/app.js', function(req, res) {
   });
 });
 
+router.get('/style.css', function(req, res) {
+  fs.readFile('public/style.css', function(err, body) {
+    res.end(body);
+  });
+});
+
+
 
 var project = require('./src/resource/project');
 

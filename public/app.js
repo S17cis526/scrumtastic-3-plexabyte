@@ -72,7 +72,6 @@
 //   }
 // }
 
-//TODO: Load the albums before the submit button.
 function loadIndex() {
   var xhr = new XMLHttpRequest();
 
@@ -120,8 +119,16 @@ function loadIndex() {
   }
 }
 
+//TODO: fix
 function showLarge(project) {
+  var url = '/images/' + project.filename;
+  $.ajax({
+    method: 'GET',
+    url: url,
+    processData: false
+  }).$('#largeImg').attr('src', url);
   $('#selectedItemPanel').css('visibility', 'visible');
+  // $('#largeImg').attr('src', '/images/' + project.filename);
   $('#itemName').html(project.name);
   $('#itemArtist').html(project.artist);
   $('#itemGenre').html(project.genre);
@@ -129,15 +136,32 @@ function showLarge(project) {
 
 function list(projects){
   var table = $('<table>').addClass('table');
-  var head = $('<tr>').append('<th>Name</th>').appendTo(table);
+  var head = $('<tr>').append('<th>Albums</th>').appendTo(table);
   projects.forEach(function(project) {
     var row = $('<tr>')
-    .append($('<td>')
-      .text(project.name))
+    .append($('<td>').text(project.name))
+      // '<div class="header"><span>' + project.name + '</span></div>' +
+      // '<div class="content">' +
+      // '<img style="float:left" src="/images/' + project.filename + '"/>' +
+      // '<h3>Artist: ' + project.artist + '</h3>' +
+      // '<h3>Genre: ' + project.genre + '</h3>' +
+      // '</div>'))
     .click(function(event) {
       event.preventDefault();
       //alert("Load using Ajax");
-      //loadProject("/projects/" + project.name);
+      console.log(project.name + " clicked");
+      // $header = $(this);
+      // //getting the next element
+      // $content = $header.next();
+      // //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+      // $content.slideToggle(500, function () {
+      //     //execute this after slideToggle is done
+      //     //change text of header based on visibility of content div
+      //     $header.text(function () {
+      //         //change text based on condition
+      //         return $content.is(":visible") ? "Collapse" : "Expand";
+      //     });
+      // });
       showLarge(project);
       //$('#largeImg').src = "/images/" + this.id;
       unselectAll();
@@ -170,7 +194,6 @@ var displayMessage = function(message, type){
 
 $('#submitItem').on('click', function() {
 
-  var xhr = new XMLHttpRequest();
   var formData = new FormData($('form')[0]);
   // var formData = new FormData();
   // formData.append('name', $('#name').val());
@@ -178,17 +201,15 @@ $('#submitItem').on('click', function() {
   // formData.append('genre', $('#genre').val());
   // formData.append('filename', $('#filename')[0].files[0], $('#filename').val());
   //TODO: add music
+  $.ajax({
+    method: 'POST',
+    url: '/projects/',
+    data: formData,
+    processData: false,
+    contentType: 'multipart/form-data',
+    success: loadIndex
+  });
 
-  xhr.open('POST', '/projects/');
-  xhr.send(formData);
-  loadIndex();
-  // $.xhr({
-  //   type: "POST",
-  //   url: '/projects',
-  //   data: formData,
-  //   contentType: 'multipart/form-data',
-  //   processData: false
-  // });
 
 
   // formData.append('filename', $('input[type=file]')[0].files[0]);

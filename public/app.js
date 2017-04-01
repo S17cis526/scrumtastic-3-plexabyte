@@ -121,14 +121,13 @@ function loadIndex() {
 
 //TODO: fix
 function showLarge(project) {
+  console.log(project.filename);
   var url = '/images/' + project.filename;
-  $.ajax({
-    method: 'GET',
-    url: url,
-    processData: false
-  }).$('#largeImg').attr('src', url);
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url);
+  xhr.send(null);
   $('#selectedItemPanel').css('visibility', 'visible');
-  // $('#largeImg').attr('src', '/images/' + project.filename);
+  $('#largeImg').attr('src', url);
   $('#itemName').html(project.name);
   $('#itemArtist').html(project.artist);
   $('#itemGenre').html(project.genre);
@@ -209,6 +208,7 @@ $('#submitItem').on('click', function() {
     contentType: 'multipart/form-data',
     success: loadIndex
   });
+
 
 
 

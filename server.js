@@ -68,35 +68,15 @@ router.get('/style.css', function(req, res) {
   });
 });
 
-var files = {};
-var items = fs.readdirSync('images');
-items.forEach(function(item) {
-  var path = 'images/' + item;
-
-  var stats = fs.statSync(path);
-  if(stats.isFile()) {
-    var parts = path.split('.');
-    var extension = parts[parts.length-1];
-    var type = 'application/octet-stream';
-    switch(extension) {
-      case 'jpeg':
-      case 'jpg':
-        type = 'image/jpeg';
-        break;
-      case 'gif':
-      case 'png':
-      case 'bmp':
-      case 'tiff':
-      case 'svg':
-        type = 'image/' + extension;
-        break;
-    }
-    files[path] = {
-      contentType: type,
-      data: fs.readFileSync(path)
-    };
-  }
-});
+// var items = fs.readdirSync('images');
+// items.forEach(function(item) {
+//   console.log(item);
+//   router.get('/images/' + item, function(req, res) {
+//     fs.readFile('images/' + item, function(err, body) {
+//       res.end(body);
+//     });
+//   });
+// });
 
 
 
@@ -129,3 +109,33 @@ function serveImage(fileName, req, res) {
     res.end(data);
   });
 }
+
+// var files = {};
+// var items = fs.readdirSync('images');
+// items.forEach(function(item) {
+//   var path = 'images/' + item;
+//
+//   var stats = fs.statSync(path);
+//   if(stats.isFile()) {
+//     var parts = path.split('.');
+//     var extension = parts[parts.length-1];
+//     var type = 'application/octet-stream';
+//     switch(extension) {
+//       case 'jpeg':
+//       case 'jpg':
+//         type = 'image/jpeg';
+//         break;
+//       case 'gif':
+//       case 'png':
+//       case 'bmp':
+//       case 'tiff':
+//       case 'svg':
+//         type = 'image/' + extension;
+//         break;
+//     }
+//     files[path] = {
+//       contentType: type,
+//       data: fs.readFileSync(path)
+//     };
+//   }
+// });

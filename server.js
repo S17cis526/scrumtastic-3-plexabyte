@@ -68,15 +68,21 @@ router.get('/style.css', function(req, res) {
   });
 });
 
-// var items = fs.readdirSync('images');
-// items.forEach(function(item) {
-//   console.log(item);
-//   router.get('/images/' + item, function(req, res) {
-//     fs.readFile('images/' + item, function(err, body) {
-//       res.end(body);
-//     });
+// router.get('/images/blood.png', function(req, res) {
+//   fs.readFile('images/blood.png', function(err, body) {
+//     res.end(body);
 //   });
 // });
+
+var items = fs.readdirSync('images');
+items.forEach(function(item) {
+  console.log(item);
+  router.get('/images/' + item, function(req, res) {
+    fs.readFile('images/' + item, function(err, body) {
+      res.end(body);
+    });
+  });
+});
 
 
 

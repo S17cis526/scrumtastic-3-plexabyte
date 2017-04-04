@@ -127,12 +127,19 @@ function showLarge(project) {
   xhr.open('GET', url);
   xhr.send(null);
   $('#selectedItemPanel').css('visibility', 'visible');
-  $('#largeImg').attr('src', url);
+  $.ajax( {
+    url: url,
+    cache: true,
+    processData: false,
+    success: function() {
+        $('#largeImg').attr('src', url);
+    }
+  });
+
   $('#itemName').html(project.name);
   $('#itemArtist').html(project.artist);
   $('#itemGenre').html(project.genre);
 }
-
 function list(projects){
   var table = $('<table>').addClass('table');
   var head = $('<tr>').append('<th>Albums</th>').appendTo(table);

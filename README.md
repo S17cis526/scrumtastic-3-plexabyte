@@ -5,14 +5,4 @@ TODO:
 * Image upload works only on MS Edge
 * Album Art doesn't show until server restart
 * Style changes needed
-
-
-* Users & Authentication
-* Projects
-* Story Cards
-* Project Backlog
-* Sprint Planning
-* Task Board
-* Burndown Chart
-* Burnup Chart
 * Music

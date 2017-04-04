@@ -47,6 +47,7 @@ var db = new sqlite3.Database('scrumtastic.sqlite3', function(err) {
   if(err) console.error(err);
 });
 
+
 // fileserver.loadDir('images');
 
 var router = new (require('./lib/route')).Router(db);

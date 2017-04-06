@@ -1,8 +1,11 @@
-# Scrumtastic
-Scrumtastic is a web-based agile development tool for [SCRUM](https://en.wikipedia.org/wiki/Scrum_(software_development))-like software development processes.  It maintains a product backlog, provides a sprint task board, and automatically generates a sprint burndown and release burnup charts.
+# Music Album Gallery
+This is a gallery for uploading and displaying simple information about an album:
+* Album Name
+* Album Artist
+* Album Genre
 
-TODO:
-* Image upload works only on MS Edge
+# TODO:
+## * Image upload works only on MS Edge
 * Album Art doesn't show until server restart
 * Style changes needed
 * Music

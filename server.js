@@ -99,9 +99,9 @@ migrate(db, 'migrations', function(err){
   server.listen(PORT, function(){
     console.log("listening on port " + PORT);
   });
-
-
 });
+
+
 
 function serveImage(fileName, req, res) {
   fs.readFile('images/' + decodeURIComponent(fileName), function(err, data){

@@ -16,30 +16,10 @@
           border-radius: 15px;
 }
 
-#itemTitle {
-
-  color: #111; font-family: 'Helvetica Neue', sans-serif;
-  font-size: 25px;
-  font-weight: bold;
-  letter-spacing: -1px;
-  line-height: 1;
-  text-align: center;
-}
-
-#itemDesc {
-  color: white;
-  font-family: 'Helvetica Neue', sans-serif;
-  font-size: 14px;
-  line-height: 24px;
-  margin: 0 0 24px;
-  text-align: center;
-  text-justify: inter-word;
-}
 
 #selectedItemPanel {
-    text-align: center;
     visibility: hidden;
-    position: fixed;
+    position: absolute;
     z-index: 100;
     top: 0; left: 0;
     width:100%;
@@ -47,12 +27,40 @@
     background-color: rgba(100,100,100, 0.8);
 }
 
-#largeImg {
-  max-width: 50%;
-  max-height: 50%;
-}
-
 .container .content {
     display: none;
     padding : 5px;
+}
+
+.media {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+
+}
+
+#largeImg {
+  max-width: 150px;
+}
+
+#addItem {
+  position: absolute;
+  left: 50%;
+}
+
+#inputForm {
+  display: inline-block;
+  text-align: center;
+}
+
+#editForm {
+  max-width: 450px;
+  background: #FAFAFA;
+  padding: 30px;
+  margin: 50px auto;
+  box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  border: 6px solid #305A72;
+  position: absolute;
+  left: 50%;
 }

@@ -126,19 +126,20 @@ function showLarge(project) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url);
   xhr.send(null);
-  $('#selectedItemPanel').css('visibility', 'visible');
-  $.ajax( {
-    url: url,
-    cache: true,
-    processData: false,
-    success: function() {
-        $('#largeImg').attr('src', url);
-    }
-  });
+  // $.ajax( {
+  //   url: url,
+  //   cache: true,
+  //   processData: false,
+  //   success: function() {
+  //       $('#largeImg').attr('src', url);
+  //   }
+  // });
 
+  $('#largeImg').attr('src', url);
   $('#itemName').html(project.name);
   $('#itemArtist').html(project.artist);
   $('#itemGenre').html(project.genre);
+  $('#selectedItemPanel').css('visibility', 'visible');
 }
 function list(projects){
   var table = $('<table>').addClass('table');
